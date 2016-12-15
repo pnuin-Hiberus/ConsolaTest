@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<List xmlns:ows="Microsoft SharePoint" Title="Encuesta5" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Encuesta5" BaseType="4" xmlns="http://schemas.microsoft.com/sharepoint/">
+  <MetaData>
+    <ContentTypes>
+      <ContentTypeRef ID="0x01">
+        <Folder TargetName="Item" />
+      </ContentTypeRef>
+      <ContentTypeRef ID="0x0120" />
+    </ContentTypes>
+    <Fields>
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+    </Fields>
+    <Views>
+     
+    </Views>
+    <Forms>
+      
+    </Forms>
+  </MetaData>
+</List>
