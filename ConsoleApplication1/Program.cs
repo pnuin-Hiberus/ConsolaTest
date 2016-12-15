@@ -136,7 +136,7 @@ namespace ConsoleApplication1
         public static void UpdateList2(string digest, string webUrl, ICredentials credentials)
         {
             HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(webUrl + "/_api/web/lists/GetByTitle('Encuesta1')");
-            endpointRequest.Method = "POST";
+            endpointRequest.Method = "POST"; 
             endpointRequest.Credentials = credentials;
             endpointRequest.Headers.Add("X-FORMS_BASED_AUTH_ACCEPTED", "f");
             endpointRequest.Accept = "application/json;odata=verbose";
