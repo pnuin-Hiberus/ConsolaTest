@@ -22,9 +22,15 @@ namespace ConsoleApplication1
                 password.AppendChar(c);
             SharePointOnlineCredentials credentials = new SharePointOnlineCredentials("sharepoint@hiberus-sp.com", password);
             //credenciales del usuario introducido
-            using (ClientContext clientContext = new ClientContext("https://hiberussp.sharepoint.com/sites/pnuin"))
+            using (ClientContext clientContext = new ClientContext("https://hiberussp.sharepoint.com/sites/pnuin_sgic"))
             {
                 clientContext.Credentials = credentials;
+
+                var contentTypes = clientContext.Web.ContentTypes.GetById("0x010100C568DB52D9D0A14D9B2FDCC96666E9F2007948130EC3DB064584E219954237AF3900242457EFB8B24247815D688C526CD44D00946EF4246E1B9B4A911ACA43D2CB9C1F");
+                var fieldLink = contentTypes.FieldLinks.GetById(new Guid("3de94b06412041a5b90788773e493458"));
+                fieldLink.Required = true;
+                contentTypes.Update(true);
+                clientContext.ExecuteQuery();
 
                 //Web web = clientContext.Web;
                 //clientContext.Load(web);
@@ -80,11 +86,11 @@ namespace ConsoleApplication1
                 //clientContext.Web.Lists.Add(listCreationInformation);
                 //clientContext.ExecuteQuery();
 
-                string digest = GetFormDigest("https://hiberussp.sharepoint.com/sites/pnuin",credentials);
+                //string digest = GetFormDigest("https://hiberussp.sharepoint.com/sites/pnuin",credentials);
                 //UpdateList(digest, "https://hiberussp.sharepoint.com/sites/pnuin", credentials);
                 //getLists(digest, "https://hiberussp.sharepoint.com/sites/pnuin", credentials);
                 //UpdateList2(digest, "https://hiberussp.sharepoint.com/sites/pnuin", credentials);
-                UpdateList3("https://hiberussp.sharepoint.com/sites/pnuin", credentials);
+                //UpdateList3("https://hiberussp.sharepoint.com/sites/pnuin", credentials);
             }
 
         }
@@ -146,8 +152,9 @@ namespace ConsoleApplication1
             endpointRequest.Headers["X-HTTP-Method"] = "MERGE";
 
             string stringData = "{ '__metadata': { 'type': 'SP.List' }, 'ReadSecurity': 2 , 'WriteSecurity' : 2 , 'NoCrawl' : true}";
-            //string stringData = "{ '__metadata': { 'type': 'SP.List' }, 'AllowMultiResponses' : true }";
             
+            //string stringData = "{ '__metadata': { 'type': 'SP.List' }, 'AllowMultiResponses' : true }";
+
             endpointRequest.ContentLength = stringData.Length;
             StreamWriter writer = new StreamWriter(endpointRequest.GetRequestStream());
             writer.Write(stringData);
